@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
-import { IColors, ITheme } from '../styles/theme.type'
+import { IColors, ITheme } from '@/styles/theme.type'
 
 const PageNotFound : NextPage = () => {
   const { colors }: ITheme = useTheme()
