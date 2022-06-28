@@ -6,10 +6,6 @@ export interface IAnimeMedia {
   bannerImage: string;
 }
 
-export interface IAnimeList {
-  type?: string;
-}
-
 export interface AnimeListStyledProp {
   loading: string;
 }

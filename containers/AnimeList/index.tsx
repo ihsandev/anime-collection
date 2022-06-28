@@ -1,23 +1,10 @@
 import Layouts from '@/layouts';
-import { IAnimeList } from './animeList.types';
 import useAction from './hooks/useAction';
-import CollectionList from './partials/CollectionList';
 import List from './partials/List';
 import { AnimeListStyled } from './styled';
 
-const AnimeList = ({type}:IAnimeList) => {
+const AnimeList = () => {
   const { animeList = [], loading } = useAction()
-  const renderList = () => {
-    if(type === 'collection') {
-      return <CollectionList />
-    }
-    return (
-      <List 
-        animeList={animeList} 
-        loading={loading} 
-      />
-    )
-  }
   const newLoading = (
     Boolean(loading) || animeList?.length === 0
   ).toString();
@@ -26,7 +13,10 @@ const AnimeList = ({type}:IAnimeList) => {
       <AnimeListStyled 
         loading={newLoading}
       >
-       {renderList()}
+       <List 
+        animeList={animeList} 
+        loading={loading} 
+      />
       </AnimeListStyled>
     </Layouts>
   )

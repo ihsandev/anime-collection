@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
-import AnimeDetailContainer from '@/containers/AnimeDetail'
+import AnimeDetailCollection from '@/containers/AnimeDetailCollection'
 
-const CollectionDetail: NextPage = () => <AnimeDetailContainer />
+const CollectionDetail: NextPage = () => <AnimeDetailCollection />
 
 export default CollectionDetail
