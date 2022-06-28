@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 
 const Footer = () => {
-  const { pathname } = useRouter()
+  const { pathname = '' } = useRouter()
   const { colors }: ITheme = useTheme()
 
   return ( 

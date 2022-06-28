@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function useAction() {
-  const { query: { id } } = useRouter()
+  const router = useRouter()
+  const id = router?.query?.id;
 
   const GET_ANIME_DETAIL = gql`
     query ($id: Int) {
@@ -30,7 +31,7 @@ export default function useAction() {
     loading, data,
   } = useQuery(GET_ANIME_DETAIL, {
     variables: {
-      id 
+      id
     } ,
     ssr: true,
     notifyOnNetworkStatusChange: true,
