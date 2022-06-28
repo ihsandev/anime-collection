@@ -1,4 +1,5 @@
 export interface IAnimeMedia {
+  id?: any; 
   title: {
     english: string;
   };

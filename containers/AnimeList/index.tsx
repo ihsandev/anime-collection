@@ -1,4 +1,3 @@
-import Skeleton from '@/components/Skeleton';
 import Layouts from '@/layouts';
 import { IAnimeList } from './animeList.types';
 import useAction from './hooks/useAction';

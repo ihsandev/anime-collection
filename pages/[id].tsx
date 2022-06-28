@@ -1,6 +1,6 @@
-import type { NextPage } from 'next'
+import withApollo from '@/configs/apolloClient'
 import AnimeDetailContainer from '@/containers/AnimeDetail'
 
-const AnimeDetail: NextPage = () => <AnimeDetailContainer />
+const AnimeDetail = () => <AnimeDetailContainer />
 
-export default AnimeDetail
+export default withApollo({ssr : true})(AnimeDetail)

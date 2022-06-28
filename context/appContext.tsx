@@ -1,8 +1,8 @@
 import { useContext, createContext, useReducer } from 'react'
 
-type Action = {type: 'SET_ANIME_LIST' | 'SET_LOADING', payload: any}
+type Action = {type: 'SET_ANIME_LIST' | 'SET_ANIME_DETAIL', payload: any}
 type Dispatch = (action: Action) => void
-type State = {animeList?: any, loading?: boolean}
+type State = {animeList?: any, animeDetail?: any}
 type AppProviderProps = {children: React.ReactNode}
 
 const AppContext = createContext<
@@ -11,7 +11,7 @@ const AppContext = createContext<
 
 const initialState = { 
   animeList: [],
-  loading: false,
+  animeDetail: {},
 }
 
 export const reducer = (state:State = initialState, action:Action) => {
@@ -21,10 +21,10 @@ export const reducer = (state:State = initialState, action:Action) => {
         ...state,
         animeList: [...state.animeList, ...action.payload]
       }
-    case 'SET_LOADING':
+    case 'SET_ANIME_DETAIL':
       return {
         ...state,
-        loading: action.payload
+        animeDetail: action.payload
       }
     default:
       return state;

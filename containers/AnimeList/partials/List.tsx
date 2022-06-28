@@ -1,8 +1,13 @@
 import Card from "@/components/Card";
 import Skeleton from "@/components/Skeleton";
+import { useRouter } from "next/router";
 import { IAnimeMedia, IList } from "../animeList.types";
 
 const List = ({animeList = [], loading}: IList) => {
+  const { push } = useRouter()
+  const handleClickDetail = (id:number) => {
+    push(`/${id}`)
+  }
   return (
     <>
       {animeList?.length > 0 ? 
@@ -12,16 +17,17 @@ const List = ({animeList = [], loading}: IList) => {
           title={item?.title?.english}
           image={item?.bannerImage}
           sizeImg={200}
+          onClick={() => handleClickDetail(item?.id)}
         />
       )) : (
-        <>
-          <Skeleton.Box height={150} width='100%' mb='0.5rem' />
-          <Skeleton.Box width='100%' />
-          <Skeleton.Box height={150} width='100%' mb='0.5rem' />
-          <Skeleton.Box width='100%' />
-          <Skeleton.Box height={150} width='100%' mb='0.5rem' />
-          <Skeleton.Box width='100%' />
-        </>
+        <div>
+          {[...new Array(4)].map((_, i) => (
+           <div key={i}>
+            <Skeleton.Box height={150} width='100%' mb='0.5rem' />
+            <Skeleton.Box width='100%' />
+           </div> 
+          ))}
+        </div>
       )}
       {loading && (
         <>

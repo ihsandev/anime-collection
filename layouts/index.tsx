@@ -16,7 +16,8 @@ const LayoutStyled = styled.div`
   @media only screen and (min-width: 600px) {
     max-width: 1024px;
   }
-`
+  position: relative;
+  `
 
 const MainStyled = styled.main`
   min-height: 100vh;

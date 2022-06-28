@@ -7,12 +7,13 @@ interface ICard {
   image?: string;
   title?: string;
   sizeImg?: string | number;
+  onClick?: () => void;
 }
 
-const Card = ({image, title, sizeImg}: ICard) => {
+const Card = ({image, title, sizeImg, onClick}: ICard) => {
   const { colors } : ITheme = useTheme()
   return (
-    <CardStyled colors={colors}>
+    <CardStyled colors={colors} onClick={onClick}>
       <Image 
         src={image || 'http://placehold.jp/200x200.png'}
         height={sizeImg || '100%'}
