@@ -20,6 +20,8 @@
       "@/containers/*": ["containers/*"],
       "@/styles/*": ["styles/*"],
       "@/public/*": ["public/*"],
+      "@/layouts": ["layouts/index"],
+      "@/configs/*": ["configs/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

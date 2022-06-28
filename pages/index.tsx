@@ -1,8 +1,8 @@
-import type { NextPage } from 'next'
-import AnimeList from '@/containers/AnimeList'
+import withApollo from '@/configs/apolloClient'
+import AnimeList from '@/containers/AnimeList';
 
-const Home: NextPage = () => <AnimeList />
+const Home = () => <AnimeList />
 
-export default Home
+export default  withApollo({ssr : true})(Home);
 
 
