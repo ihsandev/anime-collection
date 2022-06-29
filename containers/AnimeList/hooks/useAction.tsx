@@ -55,6 +55,13 @@ export default function useAction() {
     }
   }, [data])
 
+  useEffect(() => {
+    const storage = getFromLocalStorage('collections')
+    if(isList && storage) {
+      dispatch({type: 'SET_COLLECTIONS', payload: storage})
+    }
+  }, [])
+
   const handleScroll = () => {
     const element = document.documentElement;
     const size = Math.ceil(window.innerHeight + element.scrollTop);

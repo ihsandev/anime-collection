@@ -6,28 +6,35 @@ import { MdBookmark, MdDelete } from 'react-icons/md'
 interface IIcon {
   type?: string;
   iconSize?: number | string;
+  onClick?: () => void;
+  isActive?: boolean;
 }
 
-const Icon = ({type, iconSize}: IIcon) => {
+const Icon = ({type, iconSize, onClick, isActive}: IIcon) => {
   const { colors } : ITheme = useTheme()
   const renderIcon = () => {
     if(type === 'bookmark') {
-      return <MdBookmark size={iconSize} />
+      return <MdBookmark size={iconSize} 
+        color={isActive ? colors?.light : colors?.darkBlue} 
+      />
     } else if(type === 'delete') {
-      return <MdDelete size={iconSize} />
+      return <MdDelete size={iconSize} color={colors?.light} />
     }
   }
   
   const getColorType = () => {
     let color = colors?.danger;
     if(type === 'bookmark') {
-      color = colors?.darkBlue;
+      color = isActive ? colors?.darkBlue : colors?.light;
     }
     return color;
   }
 
   return (
-    <ButtonIconStyled color={getColorType()}>
+    <ButtonIconStyled 
+      color={getColorType()}
+      onClick={onClick}
+    >
       {renderIcon()}
     </ButtonIconStyled>
   )
@@ -40,7 +47,7 @@ const ButtonIconStyled  = styled.div`
   border-radius: 50%;
   padding: 0.5rem;
   background-color: ${({color}) => color || 'darkgray'};
-  color: white;
+  cursor: pointer;
 `
 
 export default Icon;

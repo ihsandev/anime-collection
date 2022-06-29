@@ -30,8 +30,12 @@ const Card = ({image, title, sizeImg, onClick, onBtnAction, actionType}: ICard) 
         </TitleStyled>
       </CardStyled>
       {onBtnAction && (
-        <DeleteStyled onClick={onBtnAction}>
-          <Button.Icon type={actionType} iconSize={20} />
+        <DeleteStyled>
+          <Button.Icon 
+            type={actionType} 
+            iconSize={20}
+            onClick={onBtnAction}
+          />
         </DeleteStyled>
       )}
     </CardWrapperStyled>
@@ -57,6 +61,13 @@ const CardStyled = styled.div<CardStyledProp>`
   border: 1.5px solid ${({colors}) => colors?.dark};
   padding: 1rem;
   border-radius: 0.5rem;
+  img { transition: 0.5s ease;}
+  &:hover {
+    border-color: ${({colors}) => colors?.darkBlue};
+    img {
+      transform: scale(1.5);
+    }
+  }
 `
 
 const TitleStyled = styled.h2<TitleStyledProp>`

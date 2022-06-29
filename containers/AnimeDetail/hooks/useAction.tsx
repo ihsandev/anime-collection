@@ -59,10 +59,9 @@ export default function useAction() {
   const addToCollection = () => {
     const storage = getFromLocalStorage('collections')
     const newData = storage ? [...storage] : []
-    if(storage) {
-      pushData(newData)
-    }
+    pushData(newData)
   }
+
   const removeFromCollection = () => {
     const storage = getFromLocalStorage('collections')
     if(storage) {

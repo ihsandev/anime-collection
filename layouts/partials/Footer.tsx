@@ -1,9 +1,11 @@
+import { getFromLocalStorage } from "@/helpers"
 import { IColors, ITheme } from "@/styles/theme.type"
 import { useTheme } from "@emotion/react"
 import styled from "@emotion/styled"
 import useAppContext from "context/appContext"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { useEffect } from "react"
 
 const Footer = () => {
   const { pathname = '' } = useRouter()

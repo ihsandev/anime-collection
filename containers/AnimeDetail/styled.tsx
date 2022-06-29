@@ -49,3 +49,9 @@ export const SubTitleStyled = styled.div`
     margin-left: 0.2rem;
   }
 `
+
+export const BookmarkStyled = styled.div`
+  position: absolute;
+  right: 1rem;
+  bottom: -2rem;
+`

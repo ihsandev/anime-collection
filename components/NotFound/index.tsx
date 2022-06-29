@@ -19,7 +19,6 @@ const NotFoundStyled = styled.div`
   flex-direction: column;
   justify-content: center;
   flex: 1;
-  border: 1px solid;
   min-height: 84vh;
   align-items: center;
   background-color: white;

@@ -1,14 +1,13 @@
 import Badge from '@/components/Badge';
 import Button from '@/components/Button';
 import Skeleton from '@/components/Skeleton';
-import { getFromLocalStorage } from '@/helpers';
 import Layouts from '@/layouts';
 import type { NextPage } from 'next'
 import Image from 'next/image';
 import { IAnimeDetail } from '../animeDetail.types';
 import useAction from '../hooks/useAction';
 import { 
-  AnimeTypeStyled, CoverStyled, 
+  AnimeTypeStyled, BookmarkStyled, CoverStyled, 
   DescriptionStyled, GenreStyled, 
   SubTitleStyled, TitleStyled 
 } from '../styled';
@@ -37,6 +36,14 @@ const List: NextPage = () => {
             <AnimeTypeStyled color={coverImage?.color}>
               {type}
             </AnimeTypeStyled>
+            <BookmarkStyled>
+              <Button.Icon 
+                type='bookmark'
+                iconSize={50}
+                onClick={isBookmark ? removeFromCollection : addToCollection}
+                isActive={isBookmark}
+              />
+            </BookmarkStyled>
           </CoverStyled>
           <SubTitleStyled color={coverImage?.color}>
             <p>Episodes: <span>{episodes}</span></p>
@@ -49,10 +56,6 @@ const List: NextPage = () => {
           </GenreStyled>
           <DescriptionStyled 
             dangerouslySetInnerHTML={{__html: description}}
-          />
-          <Button.BookmarkFloat 
-            onClick={isBookmark ? removeFromCollection : addToCollection}
-            active={isBookmark}
           />
         </>
       ) : (
