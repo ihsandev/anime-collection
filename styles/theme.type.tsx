@@ -3,6 +3,7 @@ export interface IColors {
   dark: string;
   lightBlue: string;
   darkBlue: string;
+  danger: string;
 }
 
 export interface ITheme {

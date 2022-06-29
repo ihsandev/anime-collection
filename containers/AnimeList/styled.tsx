@@ -12,8 +12,6 @@ export const AnimeListStyled = styled.div<AnimeListStyledProp>`
     flex-grow: 1;
   }
   @media only screen and (min-width: 600px) {
-    > div {
-      flex: 1 0 21%;
-    }
+    flex-direction: row;
   }
 `

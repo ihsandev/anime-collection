@@ -6,6 +6,7 @@ const theme : ITheme = {
     dark: '#16162A',
     lightBlue: '#5C7AE5',
     darkBlue: '#563EEE',
+    danger: '#ee3e3e',
   }
 }
 

@@ -8,8 +8,10 @@ export interface IAnimeDetail {
         extraLarge: string;
         color: string;
     };
+    bannerImage?: string;
     type: string;
     status: string;
     genres: string[];
     episodes: number | string;
+    isFavorite?: boolean;
 }

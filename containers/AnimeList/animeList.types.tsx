@@ -7,10 +7,5 @@ export interface IAnimeMedia {
 }
 
 export interface AnimeListStyledProp {
-  loading: string;
-}
-
-export interface IList {
-  animeList?: IAnimeMedia[],
-  loading?: boolean;
+  loading?: string;
 }

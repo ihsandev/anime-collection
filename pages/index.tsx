@@ -1,7 +1,7 @@
 import withApollo from '@/configs/apolloClient'
-import AnimeList from '@/containers/AnimeList';
+import Anime from '@/containers/AnimeList';
 
-const Home = () => <AnimeList />
+const Home = () => <Anime.List />
 
 export default  withApollo({ssr : true})(Home);
 

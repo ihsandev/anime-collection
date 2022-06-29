@@ -1,23 +1,25 @@
 import { IColors, ITheme } from "@/styles/theme.type"
 import { useTheme } from "@emotion/react"
 import styled from "@emotion/styled"
+import useAppContext from "context/appContext"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
 const Footer = () => {
   const { pathname = '' } = useRouter()
   const { colors }: ITheme = useTheme()
+  const { state } = useAppContext()
 
   return ( 
       <FooterStyled colors={colors}>
           <Link href={`/`}>
-            <a className={['/'].includes(pathname) ? 'active' : ''}>
+            <a className={['/', '/[id]'].includes(pathname) ? 'active' : ''}>
                 List
             </a>
           </Link>
           <Link href={`/collection`}>
-            <a className={['/collection'].includes(pathname) ? 'active' : ''}>
-                Collection
+            <a className={['/collection', '/collection/[id]'].includes(pathname) ? 'active' : ''}>
+                <span>({state.collections?.length})</span> Collection
             </a>
           </Link>
     </FooterStyled>
@@ -43,6 +45,13 @@ const FooterStyled = styled.footer<FooterStyledProp>`
     &:hover,
     &.active {
       background-color: ${({colors}:ITheme) => colors?.lightBlue};
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > span {
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
     }
   }
   box-sizing: border-box;

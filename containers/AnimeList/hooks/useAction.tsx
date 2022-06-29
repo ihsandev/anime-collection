@@ -1,6 +1,10 @@
+import { IAnimeDetail } from '@/containers/AnimeDetail/animeDetail.types';
+import { addToLocalStorage, getFromLocalStorage } from '@/helpers';
 import { gql, useQuery } from '@apollo/client'
 import useAppContext from 'context/appContext';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { IAnimeMedia } from '../animeList.types';
 
 
 export default function useAction() {
@@ -26,10 +30,12 @@ export default function useAction() {
   `
   const perPage = 10;
   const [page, setPage] = useState(1)
+  const { push, pathname } = useRouter()
+  const isList = pathname === '/'
+  const isCollection = pathname === '/collection'
 
-  const {
-    loading, data, fetchMore,
-  } = useQuery(GET_ANIME_LIST, {
+  const { loading, data, fetchMore } = useQuery(
+    GET_ANIME_LIST, {
     variables: {
       perPage,
       page
@@ -41,8 +47,11 @@ export default function useAction() {
   const {state, dispatch} = useAppContext()
 
   useEffect(() => {
-    if(data) {
-      dispatch({type: 'SET_ANIME_LIST', payload: data?.Page?.media})
+    if(isList && data) {
+      const filterData = data?.Page?.media?.filter((item: IAnimeMedia) => 
+        item?.title?.english !== null && item?.bannerImage !== null
+      )
+      dispatch({type: 'SET_ANIME_LIST', payload: filterData})
     }
   }, [data])
 
@@ -61,12 +70,47 @@ export default function useAction() {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    if(isList) {
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
   });
+
+  const handleClickDetail = (id:number, type: string = 'list') => {
+    if(type === 'collection') {
+      return push(`/collection/${id}`)
+    } else {
+      return push(`/${id}`)
+    }
+  }
+
+  const handleRemove = (id:number) => {
+    const storage = getFromLocalStorage('collections')
+    if(storage) {
+      const newData = storage?.filter((item: IAnimeDetail) => String(item.id) !== String(id))
+      addToLocalStorage('collections', newData)
+      dispatch({type: 'SET_COLLECTIONS', payload: newData})
+    }
+  }
+
+  const getDataCollection = () => {
+    const storage = getFromLocalStorage('collections')
+    if(storage) {
+      dispatch({type: 'SET_COLLECTIONS', payload: storage})
+    }
+  }
+
+  useEffect(() => {
+    if(isCollection) {
+      getDataCollection()
+    }
+  }, [])
 
   return {
     animeList: state.animeList,
     loading,
+    handleClickDetail,
+    collections: state.collections,
+    handleRemove
   }
 }

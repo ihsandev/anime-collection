@@ -1,6 +1,6 @@
-import type { NextPage } from 'next'
-import AnimeListCollection from '@/containers/AnimeListCollection'
+import withApollo from '@/configs/apolloClient'
+import Anime from '@/containers/AnimeList';
 
-const Collection: NextPage  = () => <AnimeListCollection />
+const Collection  = () => <Anime.Collection />
 
-export default Collection;
+export default withApollo({ssr : true})(Collection);

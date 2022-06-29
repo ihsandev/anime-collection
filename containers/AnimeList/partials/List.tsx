@@ -1,14 +1,14 @@
 import Card from "@/components/Card";
 import Skeleton from "@/components/Skeleton";
-import { useRouter } from "next/router";
-import { IAnimeMedia, IList } from "../animeList.types";
+import Layouts from "@/layouts";
+import { IAnimeMedia } from "../animeList.types";
+import useAction from "../hooks/useAction";
+import { AnimeListStyled } from "../styled";
 
-const List = ({animeList = [], loading}: IList) => {
-  const { push } = useRouter()
-  const handleClickDetail = (id:number) => {
-    push(`/${id}`)
-  }
-  return (
+const List = () => {
+  const { animeList = [], loading, handleClickDetail } = useAction()
+
+  const renderList = (
     <>
       {animeList?.length > 0 ? 
         animeList?.map((item: IAnimeMedia, i:number) => (
@@ -22,20 +22,35 @@ const List = ({animeList = [], loading}: IList) => {
       )) : (
         <div>
           {[...new Array(4)].map((_, i) => (
-           <div key={i}>
+          <div key={i}>
             <Skeleton.Box height={150} width='100%' mb='0.5rem' />
             <Skeleton.Box width='100%' />
-           </div> 
+          </div> 
           ))}
         </div>
       )}
+    </>
+  )
+
+  const newLoading = (
+    Boolean(loading) || animeList?.length === 0
+  ).toString();
+
+  return (
+     <Layouts>
+      <h1>Anime List</h1>
+      <AnimeListStyled 
+        loading={newLoading}
+      >
+        {renderList}
+      </AnimeListStyled>
       {loading && (
         <>
           <Skeleton.Box height={150} width='100%' mb='0.5rem' />
           <Skeleton.Box width='100%' />
         </>
       )}
-    </>
+    </Layouts>
   )
 }
 
