@@ -9,24 +9,24 @@ import { IAnimeMedia } from '../animeList.types';
 
 export default function useAction() {
   const GET_ANIME_LIST = gql`
-  query ($id: Int, $page: Int, $perPage: Int, $search: String) {
-    Page (page: $page, perPage: $perPage) {
-      pageInfo {
-        total
-        currentPage
-        lastPage
-        hasNextPage
-        perPage
-      }
-      media (id: $id, search: $search) {
-        id
-        title {
-          english
+    query ($id: Int, $page: Int, $perPage: Int, $search: String) {
+      Page (page: $page, perPage: $perPage) {
+        pageInfo {
+          total
+          currentPage
+          lastPage
+          hasNextPage
+          perPage
         }
-        bannerImage
+        media (id: $id, search: $search) {
+          id
+          title {
+            english
+          }
+          bannerImage
+        }
       }
-    }
-  } 
+    } 
   `
   const perPage = 10;
   const [page, setPage] = useState(1)
