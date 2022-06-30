@@ -23,7 +23,16 @@ export default function useAction() {
           title {
             english
           }
+          description
+          coverImage {
+            extraLarge
+            color
+          }
           bannerImage
+          type
+          status
+          genres
+          episodes
         }
       }
     } 
@@ -45,6 +54,17 @@ export default function useAction() {
   });
 
   const {state, dispatch} = useAppContext()
+  const [showModal, setIsShowModal] = useState(false)
+  const [collectionId, setCollectionId] = useState('')
+
+  const handleModal = (type = 'close', id?: any) => {
+    if(type === 'open') {
+      id && setCollectionId(id)
+      setIsShowModal(true)  
+    } else {
+      setIsShowModal(false)
+    }
+  }
 
   useEffect(() => {
     if(isList && data) {
@@ -91,12 +111,13 @@ export default function useAction() {
     }
   }
 
-  const handleRemove = (id:number) => {
+  const handleRemove = () => {
     const storage = getFromLocalStorage('collections')
     if(storage) {
-      const newData = storage?.filter((item: IAnimeDetail) => String(item.id) !== String(id))
+      const newData = storage?.filter((item: IAnimeDetail) => String(item.id) !== String(collectionId))
       addToLocalStorage('collections', newData)
       dispatch({type: 'SET_COLLECTIONS', payload: newData})
+      handleModal('close')
     }
   }
 
@@ -118,6 +139,8 @@ export default function useAction() {
     loading,
     handleClickDetail,
     collections: state.collections,
-    handleRemove
+    handleRemove,
+    showModal, 
+    handleModal
   }
 }

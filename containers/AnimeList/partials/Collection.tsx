@@ -1,4 +1,5 @@
 import Card from "@/components/Card";
+import Modal from "@/components/Modal";
 import NotFound from "@/components/NotFound";
 import Seo from "@/components/Seo";
 import Layouts from "@/layouts";
@@ -7,7 +8,7 @@ import useAction from "../hooks/useAction";
 import { AnimeListStyled } from "../styled";
 
 const Collection = () => {
-  const { handleClickDetail, handleRemove, collections = [] } = useAction()
+  const { handleClickDetail, handleRemove, collections = [], showModal, handleModal } = useAction()
   const renderCollection = (
     <>
       {collections?.length > 0 ?
@@ -18,7 +19,7 @@ const Collection = () => {
             image={item?.bannerImage}
             sizeImg={200}
             onClick={() => handleClickDetail(item?.id, 'collection')}
-            onBtnAction={() => handleRemove(item?.id)}
+            onBtnAction={() => handleModal('open', item?.id)}
             actionType='delete'
           />
         )) : (
@@ -40,6 +41,13 @@ const Collection = () => {
         <AnimeListStyled>
           {renderCollection}
         </AnimeListStyled>
+        <Modal 
+          isShow={showModal}
+          onCancel={handleModal}
+          onYes={handleRemove}
+          isConfirm
+          description="Are Sure want to delete ?"
+        />
       </Layouts>
     </>
   )

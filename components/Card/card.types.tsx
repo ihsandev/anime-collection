@@ -7,6 +7,7 @@ export interface ICard {
   onClick?: () => void;
   onBtnAction?: () => void;
   actionType?: string;
+  isBookmarkActive?: boolean;
 }
 
 export interface CardStyledProp {

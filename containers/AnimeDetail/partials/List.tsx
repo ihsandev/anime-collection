@@ -7,6 +7,7 @@ import type { NextPage } from 'next'
 import Image from 'next/image';
 import { IAnimeDetail } from '../animeDetail.types';
 import useAction from '../hooks/useAction';
+import useContainerAction from '../../hooks/useAction'
 import { 
   AnimeTypeStyled, BookmarkStyled, CoverStyled, 
   DescriptionStyled, GenreStyled, 
@@ -14,7 +15,9 @@ import {
 } from '../styled';
 
 const List: NextPage = () => {
-  const { animeDetail = {}, loading, addToCollection, removeFromCollection, isBookmark } = useAction()
+  const { checkIsBookmark, addToCollection, removeFromCollection } = useContainerAction()
+  const { animeDetail = {}, loading } = useAction()
+  const isBookmark = checkIsBookmark()
   const { 
     coverImage, title,
     description, type, 
@@ -46,7 +49,7 @@ const List: NextPage = () => {
                 <Button.Icon 
                   type='bookmark'
                   iconSize={50}
-                  onClick={isBookmark ? removeFromCollection : addToCollection}
+                  onClick={isBookmark ? removeFromCollection : () => addToCollection(animeDetail)}
                   isActive={isBookmark}
                 />
               </BookmarkStyled>

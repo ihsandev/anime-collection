@@ -1,5 +1,4 @@
 import Badge from '@/components/Badge';
-import Button from '@/components/Button';
 import Seo from '@/components/Seo';
 import Layouts from '@/layouts';
 import type { NextPage } from 'next'
@@ -19,6 +18,7 @@ const Collection: NextPage = () => {
     coverImage, title,description, type, 
     genres, episodes, status
   }: IAnimeDetail = collection;
+
   return (
     <>
       <Seo 

@@ -5,7 +5,7 @@ import Button from "../Button";
 import { ICard } from "./card.types";
 import { CardStyled, CardWrapperStyled, DeleteStyled, TitleStyled } from "./styled";
 
-const Card = ({image, title, sizeImg, onClick, onBtnAction, actionType}: ICard) => {
+const Card = ({image, title, sizeImg, onClick, onBtnAction, actionType, isBookmarkActive}: ICard) => {
   const { colors } : ITheme = useTheme()
   return (
     <CardWrapperStyled>
@@ -31,6 +31,7 @@ const Card = ({image, title, sizeImg, onClick, onBtnAction, actionType}: ICard) 
             type={actionType} 
             iconSize={20}
             onClick={onBtnAction}
+            isActive={isBookmarkActive}
           />
         </DeleteStyled>
       )}
