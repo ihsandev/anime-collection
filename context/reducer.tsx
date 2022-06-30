@@ -10,9 +10,15 @@ export const initialState = {
 const reducer = (state:State = initialState, action:Action) => {
   switch (action.type) {
     case 'SET_ANIME_LIST':
+      const payload = [...state.animeList, ...action.payload]
+        .filter((elm, index, arr) =>
+        index === arr.findIndex((item) => (
+          item.id === elm.id
+        ))
+      )
       return {
         ...state,
-        animeList: [...state.animeList, ...action.payload]
+        animeList: payload
       }
     case 'SET_ANIME_DETAIL':
       return {
