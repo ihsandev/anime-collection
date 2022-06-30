@@ -1,4 +1,5 @@
 import Card from "@/components/Card";
+import Seo from "@/components/Seo";
 import Skeleton from "@/components/Skeleton";
 import Layouts from "@/layouts";
 import { IAnimeMedia } from "../animeList.types";
@@ -37,20 +38,26 @@ const List = () => {
   ).toString();
 
   return (
-     <Layouts>
-      <h1>Anime List</h1>
-      <AnimeListStyled 
-        loading={newLoading}
-      >
-        {renderList}
-      </AnimeListStyled>
-      {loading && (
-        <>
-          <Skeleton.Box height={150} width='100%' mb='0.5rem' />
-          <Skeleton.Box width='100%' />
-        </>
-      )}
-    </Layouts>
+    <>
+      <Seo 
+        title="Anime List"
+        description="All Anime List"
+      />
+      <Layouts>
+        <h1>Anime List</h1>
+        <AnimeListStyled 
+          loading={newLoading}
+        >
+          {renderList}
+        </AnimeListStyled>
+        {loading && (
+          <>
+            <Skeleton.Box height={150} width='100%' mb='0.5rem' />
+            <Skeleton.Box width='100%' />
+          </>
+        )}
+      </Layouts>
+    </>
   )
 }
 
